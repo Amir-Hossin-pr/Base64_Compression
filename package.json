@@ -1,0 +1,19 @@
+{
+  "name": "base64_compression",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amir-Hossin-pr/Base64_Compression.git"
+  },
+  "author": "Amir Hossein",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Amir-Hossin-pr/Base64_Compression/issues"
+  },
+  "homepage": "https://github.com/Amir-Hossin-pr/Base64_Compression#readme"
+}
