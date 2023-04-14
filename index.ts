@@ -4,14 +4,14 @@ Anyway, 829KiB of plain text is far larger than the 32767 limit, but BWTC32Key m
 
 function compress(str: string) {
     let builder = {};
-    let strLetters = str.split("")
+    let strLetters = str.split('');
     let reult = [] as Array<any>
     let firstLetter = strLetters[0]
     let byte = 256;
     for (let i = 1; i < strLetters.length; i++) {
         let strIndex = strLetters[i]
         if (builder[firstLetter + strIndex]) firstLetter += strIndex
-        else {
+        else {        
             reult.push(1 < firstLetter.length ? builder[firstLetter] : firstLetter.charCodeAt(0));
             builder[firstLetter + strIndex] = byte;
             byte++;
@@ -49,7 +49,7 @@ function deCompress(str: string) {
 const input = str;
 
 let compressed = compress(input);
-let deCompressed = deCompress('compressed');
+let deCompressed = deCompress(compressed);
 
 console.log(`Base 64 Length is : ${input.length}`);
 console.log(`Compressed Base 64 Length is : ${compressed.length}`);

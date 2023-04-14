@@ -1,0 +1,15 @@
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\bin\Debug\net6.0\Compressor.exe
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\bin\Debug\net6.0\Compressor.deps.json
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\bin\Debug\net6.0\Compressor.runtimeconfig.json
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\bin\Debug\net6.0\Compressor.dll
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\bin\Debug\net6.0\Compressor.pdb
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\obj\Debug\net6.0\Compressor.csproj.AssemblyReference.cache
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\obj\Debug\net6.0\Compressor.GeneratedMSBuildEditorConfig.editorconfig
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\obj\Debug\net6.0\Compressor.AssemblyInfoInputs.cache
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\obj\Debug\net6.0\Compressor.AssemblyInfo.cs
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\obj\Debug\net6.0\Compressor.csproj.CoreCompileInputs.cache
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\obj\Debug\net6.0\Compressor.dll
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\obj\Debug\net6.0\refint\Compressor.dll
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\obj\Debug\net6.0\Compressor.pdb
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\obj\Debug\net6.0\Compressor.genruntimeconfig.cache
+F:\Teams\Me\Base64_Compression\CSCompreessation\Compressor\obj\Debug\net6.0\ref\Compressor.dll

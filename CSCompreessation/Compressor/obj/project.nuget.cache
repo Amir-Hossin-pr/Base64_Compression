@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "oiM0k+AMSB3DttggU3/4y7RiVe/iHZkaECIItNLwqkV3WAqCKlfxuxisOLkju+rx5p5rX3+tbjzp9sSO7ymu+g==",
+  "success": true,
+  "projectFilePath": "F:\\Teams\\Me\\Base64_Compression\\CSCompreessation\\Compressor\\Compressor.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Amir Hossein\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.13\\microsoft.windowsdesktop.app.ref.6.0.13.nupkg.sha512",
+    "C:\\Users\\Amir Hossein\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.13\\microsoft.netcore.app.ref.6.0.13.nupkg.sha512",
+    "C:\\Users\\Amir Hossein\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.13\\microsoft.aspnetcore.app.ref.6.0.13.nupkg.sha512",
+    "C:\\Users\\Amir Hossein\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.13\\microsoft.netcore.app.host.win-x64.6.0.13.nupkg.sha512"
+  ],
+  "logs": []
+}

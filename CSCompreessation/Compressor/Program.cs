@@ -5,8 +5,7 @@ string Compress(string str)
 {
     Dictionary<int, int> charDict = new();
     var strLetters = str.ToCharArray();
-    List<int> resultBuilder = new();
-    string result = "";
+    string resultCode = "";
     var firstLetter = strLetters[0];
     var byteSize = 256;
 
@@ -17,23 +16,22 @@ string Compress(string str)
             firstLetter += strIndex;
         else
         {
-            resultBuilder.Add((int)firstLetter);
+            resultCode += $"{(int)firstLetter},";
             charDict.Add(firstLetter + strIndex, byteSize);
             byteSize++;
             firstLetter = strIndex;
         }
     }
-    resultBuilder.Add((int)firstLetter);
-    foreach (var item in resultBuilder)
+    resultCode += $"{(int)firstLetter}";
+    string result = "";
+    foreach (var item in resultCode.Split(","))
     {
-        var letter = (char)item;
+        var letter = (char)int.Parse(item);
         result += letter;
     }
 
-    return result.ToString();
+    return result;
 }
 
-Console.Write("Input : ");
-var input = Console.ReadLine();
-var compressed = Compress(input);
+var compressed = Compress(txt);
 Console.WriteLine($"Orginal Text length is : {txt.Length} and compressed str length is : {compressed.Length}");
