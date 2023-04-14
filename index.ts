@@ -2,15 +2,6 @@ const str = `BWTC32Key uses a BZip-family improvement and Base32768 to get extre
 
 Anyway, 829KiB of plain text is far larger than the 32767 limit, but BWTC32Key makes it fit into less than 16K characters. For a more extreme example, the full chemical name of the Titin protein is 189 thousand letters. I can use BWTC32Key to get it down to around 640. Even using ASCII representations higher than 1 byte per character (like UTF16) as input still gives the savings.`;
 
-function toCharArray(str: string) {
-    let array: Array<string> = [];
-    for (let i = 0; i < str.length; i++) {
-        let char = str[i];
-        array.push(char);
-    }
-    return array;
-}
-
 function compress(str: string) {
     try {
         let dict = {}
