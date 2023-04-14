@@ -27,7 +27,8 @@ function compress(str: string) {
 }
 
 function deCompress(str: string) {
-    let a, e = {}
+    let builder = {}
+    let builderHelper = ""
     let strLetters = str.split("")
     let firstLetter = strLetters[0]
     let firstLetterChar = strLetters[0]
@@ -35,18 +36,34 @@ function deCompress(str: string) {
     let byte = 256;
     let startAt = 256;
     for (let i = 1; i < strLetters.length; i++) {
-        a = strLetters[i].charCodeAt(0)
-        a = byte > a ? strLetters[i] : e[a] ? e[a] : firstLetterChar + firstLetter
-        result.push(a)
-        firstLetter = a.charAt(0)
-        e[startAt] = firstLetterChar + firstLetter
+        let slIndexCode = strLetters[i].charCodeAt(0)
+        builderHelper = byte > slIndexCode ? strLetters[i] : builder[slIndexCode] ? builder[slIndexCode] : firstLetterChar + firstLetter
+        result.push(builderHelper)
+        firstLetter = builderHelper.charAt(0)
+        builder[startAt] = firstLetterChar + firstLetter
         startAt++
-        firstLetterChar = a;
+        firstLetterChar = builderHelper;
     }
     return result.join("")
 }
 
 const input = `${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}
 ${str}-${str}${str}-${str}${str}-${str}${str}-${str}`;
 
 let compressed = compress(input);

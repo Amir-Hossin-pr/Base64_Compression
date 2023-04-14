@@ -23,7 +23,8 @@ function compress(str) {
     return reult.join("");
 }
 function deCompress(str) {
-    var a, e = {};
+    var builder = {};
+    var builderHelper = "";
     var strLetters = str.split("");
     var firstLetter = strLetters[0];
     var firstLetterChar = strLetters[0];
@@ -31,17 +32,17 @@ function deCompress(str) {
     var byte = 256;
     var startAt = 256;
     for (var i = 1; i < strLetters.length; i++) {
-        a = strLetters[i].charCodeAt(0);
-        a = byte > a ? strLetters[i] : e[a] ? e[a] : firstLetterChar + firstLetter;
-        result.push(a);
-        firstLetter = a.charAt(0);
-        e[startAt] = firstLetterChar + firstLetter;
+        var slIndexCode = strLetters[i].charCodeAt(0);
+        builderHelper = byte > slIndexCode ? strLetters[i] : builder[slIndexCode] ? builder[slIndexCode] : firstLetterChar + firstLetter;
+        result.push(builderHelper);
+        firstLetter = builderHelper.charAt(0);
+        builder[startAt] = firstLetterChar + firstLetter;
         startAt++;
-        firstLetterChar = a;
+        firstLetterChar = builderHelper;
     }
     return result.join("");
 }
-var input = "".concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str);
+var input = "".concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str, "\n").concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str).concat(str, "-").concat(str);
 var compressed = compress(input);
 var deCompressed = deCompress(compressed);
 console.log("Base 64 Length is : ".concat(input.length));
