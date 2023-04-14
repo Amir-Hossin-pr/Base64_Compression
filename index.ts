@@ -7,7 +7,7 @@ function compress(str: string) {
         let dict = {}
         let data = str.split('');
         let out = [] as Array<any>
-        let currChar
+        let currChar = ''
         let phrase = data[0]
         let code = 256
         for (let i = 1; i < data.length; i++) {
@@ -40,7 +40,7 @@ function deCompress(str: string) {
         let oldPhrase = currChar
         let out = [currChar]
         let code = 256
-        let phrase
+        let phrase = ''
         for (let i = 1; i < data.length; i++) {
             let currCode = data[i].charCodeAt(0)
             if (currCode < 256) {
@@ -69,3 +69,4 @@ let deCompressed = deCompress(compressed);
 console.log(`Base 64 Length is : ${input.length}`);
 console.log(`Compressed Base 64 Length is : ${compressed.length}`);
 console.log(`De Compressed Base 64 Length is : ${deCompressed.length}`);
+console.log(`De Compressed is equal with txt : ${deCompressed == input}`);
