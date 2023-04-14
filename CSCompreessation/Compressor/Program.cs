@@ -3,23 +3,25 @@ Anyway, 829KiB of plain text is far larger than the 32767 limit, but BWTC32Key m
 
 string Compress(string str)
 {
-    Dictionary<int, int> charDict = new();
-    var strLetters = str.ToCharArray();
+    Dictionary<int, int> dict = new();
+    List<string> data = (str + "").Select(s => s.ToString()).ToList();
+    char currentChar;
     string resultCode = "";
-    var firstLetter = strLetters[0];
-    var byteSize = 256;
+    var pharse = data[0];
+    int code = 256;
 
-    for (int i = 1; i < strLetters.Length; i++)
+
+    for (int i = 1; i < data.Count; i++)
     {
-        var strIndex = strLetters[i];
-        if (charDict.ContainsKey(firstLetter + strIndex))
-            firstLetter += strIndex;
+        currentChar = data.ElementAt(i).ToCharArray()[0];
+        if (dict.ContainsKey(pharse.ToCharArray()[0] + currentChar))
+            pharse += currentChar;
         else
         {
-            resultCode += $"{(int)firstLetter},";
-            charDict.Add(firstLetter + strIndex, byteSize);
-            byteSize++;
-            firstLetter = strIndex;
+            resultCode += pharse.Length > 1 ? dict[pharse.ToCharArray()[0]] : (int)pharse.ToCharArray()[0];
+            dict[pharse.ToCharArray()[0] + currentChar] = code;
+            code++;
+            pharse = currentChar.ToString();
         }
     }
     resultCode += $"{(int)firstLetter}";
