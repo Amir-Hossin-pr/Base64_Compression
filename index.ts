@@ -3,47 +3,55 @@ BWTC32Key uses a BZip-family improvement and Base32768 to get extremely high eff
 
 Anyway, 829KiB of plain text is far larger than the 32767 limit, but BWTC32Key makes it fit into less than 16K characters. For a more extreme example, the full chemical name of the Titin protein is 189 thousand letters. I can use BWTC32Key to get it down to around 640. Even using ASCII representations higher than 1 byte per character (like UTF16) as input still gives the savings.`;
 
-function compress(str) {
-    let x = 'charCodeAt';
-    let e = {};
+function compress(str: string) {
+    let builder = {};
     let strLetters = str.split("")
     let reult = [] as Array<any>
     let firstLetter = strLetters[0]
-    let charSize = 256;
+    let byte = 256;
     for (let i = 1; i < strLetters.length; i++) {
-        str = strLetters[i]
-        e[firstLetter + str] ? firstLetter += str : (reult.push(1 < firstLetter.length ? e[firstLetter] : firstLetter[x](0)), e[firstLetter + str] = charSize, charSize++, firstLetter = str);
+        let strIndex = strLetters[i]
+        if (builder[firstLetter + strIndex]) firstLetter += strIndex
+        else {
+            reult.push(1 < firstLetter.length ? builder[firstLetter] : firstLetter.charCodeAt(0));
+            builder[firstLetter + strIndex] = byte;
+            byte++;
+            firstLetter = strIndex;
+        }
     }
-    reult.push(1 < firstLetter.length ? e[firstLetter] : firstLetter[x](0));
+    reult.push(1 < firstLetter.length ? builder[firstLetter] : firstLetter.charCodeAt(0));
     for (let i = 0; i < reult.length; i++) {
         reult[i] = String.fromCharCode(reult[i]);
     }
     return reult.join("")
 }
 
-function deCompress(str) {
+function deCompress(str: string) {
     let a, e = {}
     let strLetters = str.split("")
     let firstLetter = strLetters[0]
-    let f = strLetters[0]
+    let firstLetterChar = strLetters[0]
     let result = [firstLetter]
-    let h = 256;
-    let o = 256;
+    let byte = 256;
+    let startAt = 256;
     for (let i = 1; i < strLetters.length; i++) {
         a = strLetters[i].charCodeAt(0)
-        a = h > a ? strLetters[i] : e[a] ? e[a] : f + firstLetter
+        a = byte > a ? strLetters[i] : e[a] ? e[a] : firstLetterChar + firstLetter
         result.push(a)
         firstLetter = a.charAt(0)
-        e[o] = f + firstLetter
-        o++
-        f = a;
+        e[startAt] = firstLetterChar + firstLetter
+        startAt++
+        firstLetterChar = a;
     }
     return result.join("")
 }
 
-let compressed = compress(str);
+const input = `${str}-${str}${str}-${str}${str}-${str}${str}-${str}
+${str}-${str}${str}-${str}${str}-${str}${str}-${str}`;
+
+let compressed = compress(input);
 let deCompressed = deCompress(compressed);
 
-console.log(`Base 64 Length is : ${str.length}`);
+console.log(`Base 64 Length is : ${input.length}`);
 console.log(`Compressed Base 64 Length is : ${compressed.length}`);
 console.log(`De Compressed Base 64 Length is : ${deCompressed.length}`);
