@@ -2,15 +2,24 @@ const str = `BWTC32Key uses a BZip-family improvement and Base32768 to get extre
 
 Anyway, 829KiB of plain text is far larger than the 32767 limit, but BWTC32Key makes it fit into less than 16K characters. For a more extreme example, the full chemical name of the Titin protein is 189 thousand letters. I can use BWTC32Key to get it down to around 640. Even using ASCII representations higher than 1 byte per character (like UTF16) as input still gives the savings.`;
 
+function toCharArray(str: string) {
+    let array: Array<string> = [];
+    for (let i = 0; i < str.length; i++) {
+        let char = str[i];
+        array.push(char);
+    }
+    return array;
+}
+
 function compress(str: string) {
     try {
-        var dict = {}
-        var data = (str + '').split('')
-        var out = [] as Array<any>
-        var currChar
-        var phrase = data[0]
-        var code = 256
-        for (var i = 1; i < data.length; i++) {
+        let dict = {}
+        let data = str.split('');
+        let out = [] as Array<any>
+        let currChar
+        let phrase = data[0]
+        let code = 256
+        for (let i = 1; i < data.length; i++) {
             currChar = data[i]
             if (dict[phrase + currChar] != null) {
                 phrase += currChar
@@ -22,7 +31,7 @@ function compress(str: string) {
             }
         }
         out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0))
-        for (var j = 0; j < out.length; j++) {
+        for (let j = 0; j < out.length; j++) {
             out[j] = String.fromCharCode(out[j])
         }
         return out.join('')
@@ -34,15 +43,15 @@ function compress(str: string) {
 
 function deCompress(str: string) {
     try {
-        var dict = {}
-        var data = (str + '').split('')
-        var currChar = data[0]
-        var oldPhrase = currChar
-        var out = [currChar]
-        var code = 256
-        var phrase
-        for (var i = 1; i < data.length; i++) {
-            var currCode = data[i].charCodeAt(0)
+        let dict = {}
+        let data = str.split('')
+        let currChar = data[0]
+        let oldPhrase = currChar
+        let out = [currChar]
+        let code = 256
+        let phrase
+        for (let i = 1; i < data.length; i++) {
+            let currCode = data[i].charCodeAt(0)
             if (currCode < 256) {
                 phrase = data[i]
             } else {
