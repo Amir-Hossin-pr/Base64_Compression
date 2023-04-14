@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Amir-Hossin-pr/Base64_Compression/issues"
   },
-  "homepage": "https://github.com/Amir-Hossin-pr/Base64_Compression#readme"
+  "homepage": "https://github.com/Amir-Hossin-pr/Base64_Compression#readme",
+  "dependencies": {
+    "tsc": "^2.0.4"
+  }
 }
