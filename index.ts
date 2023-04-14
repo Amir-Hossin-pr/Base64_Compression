@@ -3,62 +3,52 @@ const str = `BWTC32Key uses a BZip-family improvement and Base32768 to get extre
 Anyway, 829KiB of plain text is far larger than the 32767 limit, but BWTC32Key makes it fit into less than 16K characters. For a more extreme example, the full chemical name of the Titin protein is 189 thousand letters. I can use BWTC32Key to get it down to around 640. Even using ASCII representations higher than 1 byte per character (like UTF16) as input still gives the savings.`;
 
 function compress(str: string) {
-    try {
-        let dict = {}
-        let data = str.split('');
-        let out = [] as Array<any>
-        let currChar = ''
-        let phrase = data[0]
-        let code = 256
-        for (let i = 1; i < data.length; i++) {
-            currChar = data[i]
-            if (dict[phrase + currChar] != null) {
-                phrase += currChar
-            } else {
-                out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0))
-                dict[phrase + currChar] = code
-                code++
-                phrase = currChar
-            }
+    let dict = {}
+    let data = str.split('');
+    let out = [] as Array<any>
+    let currChar = ''
+    let phrase = data[0]
+    let code = 256
+    for (let i = 1; i < data.length; i++) {
+        currChar = data[i]
+        if (dict[phrase + currChar] != null) {
+            phrase += currChar
+        } else {
+            out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0))
+            dict[phrase + currChar] = code
+            code++
+            phrase = currChar
         }
-        out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0))
-        for (let j = 0; j < out.length; j++) {
-            out[j] = String.fromCharCode(out[j])
-        }
-        return out.join('')
-    } catch (e) {
-        console.log('Failed to zip string return empty string', e)
-        return ''
     }
+    out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0))
+    for (let j = 0; j < out.length; j++) {
+        out[j] = String.fromCharCode(out[j])
+    }
+    return out.join('')
 }
 
 function deCompress(str: string) {
-    try {
-        let dict = {}
-        let data = str.split('')
-        let currChar = data[0]
-        let oldPhrase = currChar
-        let out = [currChar]
-        let code = 256
-        let phrase = ''
-        for (let i = 1; i < data.length; i++) {
-            let currCode = data[i].charCodeAt(0)
-            if (currCode < 256) {
-                phrase = data[i]
-            } else {
-                phrase = dict[currCode] ? dict[currCode] : oldPhrase + currChar
-            }
-            out.push(phrase)
-            currChar = phrase.charAt(0)
-            dict[code] = oldPhrase + currChar
-            code++
-            oldPhrase = phrase
+    let dict = {}
+    let data = str.split('')
+    let currChar = data[0]
+    let oldPhrase = currChar
+    let out = [currChar]
+    let code = 256
+    let phrase = ''
+    for (let i = 1; i < data.length; i++) {
+        let currCode = data[i].charCodeAt(0)
+        if (currCode < 256) {
+            phrase = data[i]
+        } else {
+            phrase = dict[currCode] ? dict[currCode] : oldPhrase + currChar
         }
-        return out.join('')
-    } catch (e) {
-        console.log('Failed to unzip string return empty string', e)
-        return ''
+        out.push(phrase)
+        currChar = phrase.charAt(0)
+        dict[code] = oldPhrase + currChar
+        code++
+        oldPhrase = phrase
     }
+    return out.join('')
 }
 
 const input = str;
