@@ -34,8 +34,34 @@ static string Compress(string str)
 
 static string DeCompress(string str)
 {
+    Dictionary<int, string> dict = new();
+    var data = str.Select(s => s.ToString()).ToArray();
+    var currentChar = data[0];
+    string outer = currentChar;
+    var oldPharse = currentChar;
+    var code = 256;
+    var pharse = "";
 
+    for (int i = 1; i < data.Length; i++)
+    {
+        var currentCode = (int)data[i][0];
+        if (currentCode < 256)
+            pharse = data[i];
+        else
+            pharse = dict.ContainsKey(currentCode) ?
+                     dict[currentCode] : oldPharse + currentChar;
+
+        outer += pharse;
+        currentChar = pharse[0].ToString();
+        dict[code] = oldPharse + currentChar;
+        code++;
+        oldPharse = pharse;
+    }
+    return outer;
 }
 
 var compressed = Compress(txt);
+var deCompressed = DeCompress(compressed);
 Console.WriteLine($"Orginal Text length is : {txt.Length} and compressed str length is : {compressed.Length}");
+Console.WriteLine($"Orginal Text length is : {txt.Length} and deCompressed str length is : {deCompressed.Length}");
+Console.WriteLine($"De Compressed Str is equal to original str : {deCompressed == txt}");
