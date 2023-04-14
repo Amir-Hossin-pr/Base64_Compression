@@ -1,8 +1,16 @@
 var str = "BWTC32Key uses a BZip-family improvement and Base32768 to get extremely high efficiency, and its optional encryption is AES256-CTR to avoid padding. Anything you want (including strings), can be fed into it and the result will be a very efficient UTF16 string containing the input after heavy compression (and optionally encryption after the compression but before the Base32768.) I ran my 829KiB compendium of homemade Minecraft command block commands from eons ago through BWTC32Key, and I got a 13078 character output string. Minecraft command blocks can go up to 32767 characters, but some older versions of the game only allowed in-game use of strings half that size though by using MCEdit you could hit the 32767 size, though this issue was soon fixed.\n\nAnyway, 829KiB of plain text is far larger than the 32767 limit, but BWTC32Key makes it fit into less than 16K characters. For a more extreme example, the full chemical name of the Titin protein is 189 thousand letters. I can use BWTC32Key to get it down to around 640. Even using ASCII representations higher than 1 byte per character (like UTF16) as input still gives the savings.";
+function toCharArray(str) {
+    var array = [];
+    for (var i = 0; i < str.length; i++) {
+        var char = str[i];
+        array.push(char);
+    }
+    return array;
+}
 function compress(str) {
     try {
         var dict = {};
-        var data = (str + '').split('');
+        var data = toCharArray(str);
         var out = [];
         var currChar;
         var phrase = data[0];
@@ -13,9 +21,6 @@ function compress(str) {
                 phrase += currChar;
             }
             else {
-                if (phrase.length > 1) {
-                    console.log('bigger');
-                }
                 out.push(phrase.length > 1 ? dict[phrase] : phrase.charCodeAt(0));
                 dict[phrase + currChar] = code;
                 code++;
